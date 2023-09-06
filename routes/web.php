@@ -17,16 +17,40 @@ use Illuminate\Support\Facades\Route;
     return 'Olá, seja bem-vindo ao curso!';
 });*/
 
-Route::get('/', 'PrincipalController@principal');
+Route::get('/', 'PrincipalController@principal')->name('site.index');
 
-Route::get('/sobre-nos', 'SobreNosController@sobreNos');
+Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos');
 
-Route::get('/contato', 'ContatoController@contato');
+Route::get('/contato', 'ContatoController@contato')->name('site.contato');
 
-Route::get('/login', function() { return 'Login'; });
-Route::get('/clientes', function() { return 'Clientes'; });
-Route::get('/fornecedores', function() { return 'Fornecedores'; });
-Route::get('/produtos', function() { return 'Produtos'; });
+Route::get('/login', function() { return 'Login'; })->name('site.login');
+
+//criando um prefixo para agrupar as rotas;
+Route::prefix('/app')->group(function () {
+    Route::get('/clientes', function() { return 'Clientes'; })->name('app.clientes');
+    Route::get('/fornecedores', function() { return 'Fornecedores'; })->name('app.fornecedores');
+    Route::get('/produtos', function() { return 'Produtos'; })->name('app.produtos');
+
+});
+
+Route::get('/teste/{p1}/{p2}', 'TesteController@teste')->name('teste');
+Route::get('/teste1/{par1}/{par2}', 'Teste1Controller@teste1')->name('teste1');
+
+//redirecionando rotas (redirect);
+    /*
+    Route::get('/rota2', function() {
+        return redirect()->route('site.rota1');
+    })->name('site.rota2');
+
+    Route::get('/rota3', function() {
+        return redirect()->route('site.rota1');
+    })->name('site.rota3');*/
+    //Route::redirect('/rota2', '/rota1');
+
+//criando rota de fallback;
+Route::fallback(function() {
+    echo 'A rota acessada não existe. <a href="'.route('site.index').'">Clique aqui</a> para ir para a página inicial!';
+});
 
 
 
