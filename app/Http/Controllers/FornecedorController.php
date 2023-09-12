@@ -11,9 +11,10 @@ class FornecedorController extends Controller
             0 => [
                 'nome' => 'Fornecedor 1', 
                 'status' => 'S',
-                'cnpj' => '0',
+                'cnpj' => '044444',
                 'ddd' => '11', //São paulo (SP)
-                'telefone' => '0000-0000'
+                'telefone' => '0000-0000',
+                'estado' => 'SP'
             ],
 
             1 => [
@@ -21,7 +22,8 @@ class FornecedorController extends Controller
                 'status' => 'N',
                 'cnpj' => null,
                 'ddd' => '85', //Fortaleza (CE)
-                'telefone' => '0000-0000'
+                'telefone' => '0000-0000',
+                'estado' => 'CE'
             ],
 
             2 => [
@@ -29,15 +31,28 @@ class FornecedorController extends Controller
                 'status' => 'S',
                 'cnpj' => null,
                 'ddd' => '32', //Juiz de Fora (MG)
-                'telefone' => '0000-0000'
+                'telefone' => '0000-0000',
+                'estado' => 'MG',
+                'serviço' => 'extratos'
             ],
 
             3 => [
                 'nome' => 'Fornecedor 4',
                 'status' => 'N',
-                'cnpj' => '1',
+                'cnpj' => '122323223',
                 'ddd' => '81', //Recife (PE)
+                'estado' => 'PE',
                 'telefone' => '0000-0000'
+            ],
+
+            4 => [
+                'nome' => 'Fornecedor 5',
+                'status' => 'S',
+                'cnpj' => null,
+                'ddd' => null,
+                'telefone' => '0000-0000',
+                'estado' => null,
+                'serviço' => 'banco'
             ]
         ];
 
