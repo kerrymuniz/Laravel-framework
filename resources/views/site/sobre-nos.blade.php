@@ -1,22 +1,10 @@
 {{-- a função @extends conecta o template com a view --}}
 @extends('site.layouts.basico')
 
+    @section('titulo', 'Sobre Nós')
+
 {{-- a função @secton está selecionando todo o conteúdo que irá ser passado para o template --}}
     @section('conteudo')
-        <div class="topo">
-
-            <div class="logo">
-                <img src="{{ asset('img/logo.png') }}">
-            </div>
-
-            <div class="menu">
-                <ul>
-                    <li><a href="{{ route('site.index') }}">Principal</a></li>
-                    <li><a href="{{ route('site.sobrenos') }}">Sobre Nós</a></li>
-                    <li><a href="{{ route('site.contato') }}">Contato</a></li>
-                </ul>
-            </div>
-        </div>
 
         <div class="conteudo-pagina">
             <div class="titulo-pagina">
