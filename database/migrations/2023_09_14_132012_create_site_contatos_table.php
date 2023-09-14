@@ -13,6 +13,7 @@ class CreateSiteContatosTable extends Migration
      */
     public function up()
     {
+        //criando a tabela
         Schema::create('site_contatos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
@@ -31,6 +32,7 @@ class CreateSiteContatosTable extends Migration
      */
     public function down()
     {
+        //removendo a tabela caso ela exista
         Schema::dropIfExists('site_contatos');
     }
 }
