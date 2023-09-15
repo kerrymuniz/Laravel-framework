@@ -1,0 +1,62 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateUnidadesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        //criando a tabela unidades
+        Schema::create('unidades', function (Blueprint $table) {
+            $table->id();  //as colunas ids das tabelas são criadas com o tipo unsignedBigInteger;
+            $table->string('unidade', 5); //cm, mm, kg...
+            $table->string('descricao', 30);
+            $table->timestamps();
+        });
+
+        //adiconar o relacionamento com a table produtos
+        Schema::table('produtos', function(Blueprint $table) {
+            $table->unsignedBigInteger('unidade_id');
+            $table->foreign('unidade_id')->references('id')->on('unidades');
+        });
+
+        //adicionar o relacionamento com a table produtos_detalhes
+        Schema::table('produtos_detalhes', function(Blueprint $table) {
+            $table->unsignedBigInteger('unidade_id');
+            $table->foreign('unidade_id')->references('id')->on('unidades');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //remover o relacionamento com a tabela produtos_detalhes
+        Schema::table('produtos_detalhes', function(Blueprint $table) {
+            //remover fk
+            $table->dropForeign('produtos_detalhes_unidade_id_foreign'); //[table]_[coluna]_foreign
+            //remover a coluna unidade_id
+            $table->dropColumn('unidade_id');
+        });
+
+        //remover o relacionamento com a tabela produtos
+        Schema::table('produtos', function(Blueprint $table) {
+            //remover fk
+            $table->dropForeign('produtos_unidade_id_foreign'); //[table]_[coluna]_foreign
+            //remover a coluna unidade_id
+            $table->dropColumn('unidade_id');
+        });
+
+        Schema::dropIfExists('unidades');
+    }
+}
