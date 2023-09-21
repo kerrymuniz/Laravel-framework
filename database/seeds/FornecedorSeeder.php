@@ -12,7 +12,7 @@ class FornecedorSeeder extends Seeder
      */
     public function run()
     {
-        //Instanciando o obbjeto ( criando registros no seeder );
+        //Instanciando o objeto ( criando registros no seeder );
         $fornecedor = new Fornecedor();
         $fornecedor->nome = 'Fornecedor 100';
         $fornecedor->site = 'fornecedor100.com.br';
