@@ -10,9 +10,10 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    { //sempre que criar uma Seed é necessário chamar atavés desse comando a Seeder criada;
         // $this->call(UsersTableSeeder::class);
         $this->call(FornecedorSeeder::class);
         $this->call(SiteContatoSeeder::class);
+        $this->call(MotivoContatoSeeder::class);
     }
 }
