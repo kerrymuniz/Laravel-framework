@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\LogAcessoMiddleware; //para utilizar o middleware precisa dar um use no arquivo;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,9 @@ use Illuminate\Support\Facades\Route;
     return 'Olá, seja bem-vindo ao curso!';
 });*/
 
-Route::get('/', 'PrincipalController@principal')->name('site.index');
+Route::middleware(LogAcessoMiddleware::class) //utilizando o middleware
+    ->name('site.index')
+    ->get('/', 'PrincipalController@principal');
 
 Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos');
 
