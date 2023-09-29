@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\LogAcessoMiddleware; //para utilizar o middleware precisa dar um use no arquivo;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +17,7 @@ use App\Http\Middleware\LogAcessoMiddleware; //para utilizar o middleware precis
     return 'Olá, seja bem-vindo ao curso!';
 });*/
 
-Route::middleware(LogAcessoMiddleware::class) //utilizando o middleware
-    ->name('site.index')
-    ->get('/', 'PrincipalController@principal');
+Route::get('/', 'PrincipalController@principal')->name('site.index')->middleware('log.acesso');
 
 Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos');
 
@@ -30,7 +27,7 @@ Route::post('/contato', 'ContatoController@salvar')->name('site.contato');
 Route::get('/login', function() { return 'Login'; })->name('site.login');
 
 //criando um prefixo para agrupar as rotas;
-Route::prefix('/app')->group(function () {
+Route::middleware('autenticacao:padrao, visitante')->prefix('/app')->group(function () {
     Route::get('/clientes', function() { return 'Clientes'; })->name('app.clientes');
     Route::get('/fornecedores', 'FornecedorController@index')->name('app.fornecedores');
     Route::get('/produtos', function() { return 'Produtos'; })->name('app.produtos');
