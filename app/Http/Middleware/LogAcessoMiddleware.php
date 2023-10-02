@@ -24,7 +24,7 @@ class LogAcessoMiddleware
         //return $next($request); //variável que empurra uma requisição do middleware para outra;
 
         $resposta = $next($request);
-        //return $resposta;
-        dd($resposta);
+        return $resposta;
+        //dd($resposta);
     }
 }
