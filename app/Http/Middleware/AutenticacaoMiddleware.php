@@ -15,21 +15,11 @@ class AutenticacaoMiddleware
      */
     public function handle($request, Closure $next, $metodo_autenticacao, $perfil)
     {
-        //verifica se o usuário possui acesso a rota
-        echo $metodo_autenticacao .' - '.$perfil. '<br>';
-        
-        if($metodo_autenticacao == 'padrao') {
-            echo 'Verificar o usuário e senha no banco de dados' .$perfil. '<br>';
-        }
-
-        if($metodo_autenticacao == 'ldap') {
-            echo 'Verificar o usuário e senha no AD' .$perfil. '<br>';
-        }
-
-        if(false) {
-            return $next($request); //variável que empurra uma requisição do middleware para outra;
-        } else {
-            return Response('Acesso negado, rota precisa de autenticação');
+        session_start();
+        if(isset($_SESSION['email']) && $_SESSION['email'] != '') {
+            return $next($request); //empurrando a requisição pra o passo seguinte;
+        } else{
+            return redirect()->route('site.login', ['erro' => 2]);
         }
     }
 }
